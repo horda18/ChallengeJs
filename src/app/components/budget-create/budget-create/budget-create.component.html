@@ -1,0 +1,69 @@
+<div class="row justify-content-center p-5">
+  <div class="col-md-4">
+    <div class="card card-outline-secondary">
+      <div class="card-header">
+        <h4>New Operation</h4>
+      </div>
+      <!-- form card register -->
+      <div class="card-body">
+        <form [formGroup]="budgetForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="inputName">Concept:</label>
+            <input class="form-control mb-2" type="text" formControlName="concept" placeholder="concept">
+            <!-- error -->
+            <div class="invalid-feedback pb-2" *ngIf="submitted && myForm.concept.errors?.required">
+              concept is required.
+            </div>
+
+
+
+            <div class="form-group">
+              <label for="inputName">Amount:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <input class="form-control mb-2" type="number" formControlName="amount" placeholder="amount">
+              </div>
+              <!-- error -->
+              <div class="invalid-feedback pb-2" *ngIf="submitted && myForm.amount.errors?.required">
+                Amount is required.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputName">Date:</label>
+              <input class="form-control mb-2" type="date" formControlName="date">
+              <!-- error -->
+              <div class="invalid-feedback pb-2" *ngIf="submitted && myForm.date.errors?.required">
+                date is required.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="type">Type:</label>
+              <select class="custom-select form-control" formControlName="type">
+                <option value="" disabled>Select Type...</option>
+                <option *ngFor="let type of types" value="{{type}}">{{type}}
+                </option>
+              </select>
+              <!-- error -->
+              <div class="invalid-feedback pb-2" *ngIf="submitted && myForm.type.errors?.required">
+                type is required.
+              </div>
+            </div>
+
+            <div class="form-group pt-3">
+              <button class="btn btn-success btn-lg btn-block" type="submit">Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="icon-return">
+  <a data-toggle="tooltip" data-placement="left" title="Regresar" class="btn previous1" routerLink="/budgets">&laquo;
+    Return</a>
+</div>

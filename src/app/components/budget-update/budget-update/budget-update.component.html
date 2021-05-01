@@ -1,0 +1,60 @@
+<div class="modal-body">
+  <!-- form card register -->
+  <div class="card card-outline-secondary">
+    <div class="card-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit Operation</h4>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <label for="imprint">Concept:</label>
+          <input class="form-control mb-2" type="text" formControlName="concept" placeholder="concept">
+          <div class="invalid-feedback pb-2" *ngIf="!submitted && myForm.concept.errors?.required">
+            Concept is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inputName">Amount:</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+            <input class="form-control mb-2" type="number" formControlName="amount" placeholder="amount">
+          </div>
+          <!-- error -->
+          <div class="invalid-feedback pb-2" *ngIf="submitted && myForm.amount.errors?.required">
+            Amount is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date:</label>
+          <input class="form-control mb-2" type="date" formControlName="date">
+          <div class="invalid-feedback pb-2" *ngIf="!submitted && myForm.date.errors?.required">
+            Date is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="type">Type:</label>
+          <select class="custom-select form-control" (change)="updateType($event.target.value)"
+            formControlName="type">
+            <option *ngFor="let type of types" value="{{type}}">{{type}}
+            </option>
+          </select>
+          <div class="invalid-feedback pb-2" *ngIf="submitted && myForm.type.errors?.required">
+            Type is required.
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button [disabled]="submitted" class="btn btn-success">Update</button>
+          <button [disabled]="submitted" type="button" class="btn btn-danger"
+            (click)="modal.close('Cancel')">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div><!-- form  -->
+</div>

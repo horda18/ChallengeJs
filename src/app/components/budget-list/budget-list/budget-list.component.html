@@ -1,0 +1,37 @@
+<div class="container pt-5">
+
+  <a class="btn btn-success mb-4 mt-2" routerLinkActive="active" routerLink="/budget/create">+ Operation</a>
+
+  <p *ngIf="budgets.length <= 0" class="no-data text-center">There are no budgets added yet!</p>
+
+  <table datatable class="table table-bordered table-striped pt-2" *ngIf="budgets.length > 0">
+    <thead class="table-dark">
+      <tr>
+        <th class="text-center" scope="col">Concept</th>
+        <th class="text-center" scope="col">Amount</th>
+        <th class="text-center" scope="col">Date</th>
+        <th class="text-center" scope="col center">Type</th>
+        <th class="text-center" scope="col center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let budget of budgets; let i = index">
+        <td class="text-center">{{budget.concept}}</td>
+        <td class="text-center">{{budget.amount | currency}}</td>
+        <td class="text-center">{{budget.date | date:'mediumDate':'UTC'}}</td>
+        <td *ngIf="budget.type === 'Income'" class="text-center text-success fw-bold">{{budget.type}}</td>
+        <td *ngIf="budget.type === 'Expense'" class="text-center text-danger fw-bold">{{budget.type}}</td>
+        <td class="text-center edit-block">
+          <span class="edit" (click)="editBudget(budget)">
+            <button type="button" class="btn btn-success btn-sm">Edit</button>
+          </span>
+          <span class="delete" (click)="removeGenre(budget, i)">
+            <button type="button" class="btn btn-danger btn-sm">Delete</button>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
